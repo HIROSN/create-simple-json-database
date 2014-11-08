@@ -124,7 +124,7 @@ describe('Simple JSON database', function() {
     });
   });
 
-  it('should return error when failed to find the file', function(done) {
+  it('returns false success when the file is not found', function(done) {
     fs.unlink(dir, function(err) {
       expect(err).equals(null);
 
@@ -133,7 +133,7 @@ describe('Simple JSON database', function() {
         end(function(err, res) {
           expect(err).equals(null);
           expect(res).to.be.a('object');
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(204);
           done();
         });
     });

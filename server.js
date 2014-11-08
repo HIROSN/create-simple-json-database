@@ -28,9 +28,13 @@ app.post('/:filename', function(req, res) {
 app.get('/:filename', function(req, res) {
   var path = dir + req.params.filename + ext;
 
-  fs.readFile(path, {encoding: 'utf8'}, function(err, data) {
-    if (err) { return res.status(500).end(); }
-    res.json(JSON.parse(data));
+  fs.exists(path, function(exists) {
+    if (!exists) { return res.status(204).end(); }
+
+    fs.readFile(path, {encoding: 'utf8'}, function(err, data) {
+      if (err) { return res.status(500).end(); }
+      res.json(JSON.parse(data));
+    });
   });
 });
 
