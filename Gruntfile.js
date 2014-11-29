@@ -1,8 +1,10 @@
 'use strict';
 
 module.exports = function(grunt) {
-  var testFiles = ['test/**/*.js'];
-  var srcFiles = ['*.js'].concat(testFiles);
+  var srcFiles = [
+    '**/*.js',
+    '!node_modules/**/*'
+  ];
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-jscs');
@@ -10,7 +12,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     simplemocha: {
-      src: testFiles
+      src: ['test/**/*.js']
     },
 
     jshint: {
